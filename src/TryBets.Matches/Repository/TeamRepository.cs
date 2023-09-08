@@ -12,6 +12,15 @@ public class TeamRepository : ITeamRepository
 
     public IEnumerable<TeamDTOResponse> Get()
     {
-        throw new NotImplementedException();
+        var teams = _context.Teams.ToList();
+
+        // Mapeia as equipes para objetos TeamDTOResponse
+        var teamDTOs = teams.Select(team => new TeamDTOResponse
+        {
+            TeamId = team.TeamId,
+            TeamName = team.TeamName
+        });
+
+        return teamDTOs;
     }
 }
